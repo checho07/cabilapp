@@ -1,0 +1,7 @@
+{
+  "name": "cabilapp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
