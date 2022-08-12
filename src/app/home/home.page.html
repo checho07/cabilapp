@@ -1,20 +1,113 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
+<ion-header [translucent]="false">
+  <ion-toolbar color="primary">
+    <ion-title color="light" class="ion-text-center">
+      CabilApp
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div id="bg">
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <div class="container">
+
+      <div class="logoApp" >
+        <img src="assets/icono-cabilapp.png" alt="" >
+      </div>
+
+      <div class="appName">
+        <strong  >Bienvenido a Cabil App</strong>
+      </div>
+
+      <div class="buttonsGroup">
+        <p>
+          <ion-button  (click)="checkStartSurvey()" fill="solid" shape="round" expand="block" class="action-btn">
+            Comenzar encuesta
+          </ion-button>
+        </p>
+        <p>
+          <ion-button id="open-modal" (click)="openModal(true)"  fill="solid" shape="round" expand="block" class="action-btn">   
+             respuestas   
+              ({{surveysTotal || 0 }})
+          </ion-button>
+        </p>
+        <ion-modal  [isOpen]="isModalOpen" >
+          <ng-template>
+            <ion-header>
+              <ion-toolbar color="primary">
+                <ion-buttons slot="start">
+                  <ion-button (click)="cancel()">cerrar</ion-button>
+                </ion-buttons>
+                <ion-title>Respuestas</ion-title>
+                <ion-buttons slot="end">
+                  <ion-button (click)="confirm()" [strong]="true" [disabled]="!surveysAnsweredObj.showSync">
+                    <ion-icon slot="icon-only" name="sync"></ion-icon>
+                  </ion-button>
+                </ion-buttons>
+              </ion-toolbar>
+            </ion-header>
+            <ion-content class="ion-padding">
+              <ion-list>
+                <ion-list-header>
+                  <ion-label>lista de respuestas</ion-label>
+                </ion-list-header>
+                  <ion-card *ngFor="let answer of surveysAnsweredObj.items" color="light" >
+                    <ion-card-header>
+                      <ion-card-title> ID: {{answer.id_WebTablasBasicasApp_encuesta_id }}</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                      <span><strong>Nombre: </strong> {{answer.surveyName}}</span>
+                      <br>
+                    <span><strong>Fecha de presentacion:</strong> {{answer.date_created | date}}</span>
+                 
+                    </ion-card-content>
+                  </ion-card>
+              
+              </ion-list>
+            </ion-content>
+          </ng-template>
+        </ion-modal>
+        <p>
+          <ion-button (click)="updateSurveys()" fill="solid" shape="round" expand="block"  class="action-btn" >   
+            Sincronizar encuestas
+          </ion-button>
+        </p>
+     
+      </div>
+
+      <div class="footer-container">
+        <div>
+          <img src="assets/marquesas-logo.png" alt="">
+        </div>
+        <div>
+          <img src="assets/fundacion-cabila-logo.png" alt="">
+        </div>
+        <div>
+          <img src="assets/logo-gobernacion.jpg" alt="">
+        </div>
+      </div>
+
+    </div> 
+
+    <!-- <div id="container">
+
+      
+      <p>
+        <ion-button [routerLink]="['/survey']" routerLinkActive="router-link-active"   fill="solid" shape="">
+          Comenzar encuesta
+        </ion-button>
+      </p>
+      <p>
+        <ion-button (click)="showInfoSaved()"     fill="solid" shape="">   
+          Sincronizar respuestas - ({{surveys}})
+        </ion-button>
+      </p>
+      <p>
+        <ion-button (click)="updateSurveys()" fill="solid" shape="">   
+          Sincronizar encuestas
+        </ion-button>
+      </p>
+    </div> -->
   </div>
-</ion-content>
+  </ion-content>
+

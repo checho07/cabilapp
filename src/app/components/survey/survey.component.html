@@ -1,0 +1,64 @@
+
+   <ion-header>
+    <ion-toolbar>
+      <ion-title>Encuesta # {{encuesta?.id}}</ion-title>
+      <ion-buttons slot="start">
+        <ion-button (click)="goBack()" *ngIf="pregunta > 0">
+          <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+   </ion-header>
+   
+  
+   <small>{{encuesta?.name}}</small>
+
+
+   <ion-card>
+    <ion-progress-bar  [value]="(1 * (pregunta+1)) /12 " color="primary"></ion-progress-bar>
+<ion-card-header>
+  <ion-card-subtitle>Pregunta {{pregunta+1}} de 12</ion-card-subtitle>
+  <ion-card-title>{{encuesta?.preguntas[pregunta].text}}</ion-card-title> 
+
+</ion-card-header>
+
+<ion-card-content>
+  <ion-list>
+
+    <!-- <ion-button expand="block" fill="outline" *ngFor="let option of encuesta.preguntas[pregunta].options ; let i = index" (click)="next(i)"  shape="round" class="ion-margin">
+      {{option}}
+    </ion-button> -->
+
+    <ion-card *ngFor="let option of encuesta?.preguntas[pregunta].options ; let i = index" (click)="next(i+1)" class="ion-margin" >
+      <ion-card-content>
+        <ion-item>
+          <ion-icon  [name]=" (i+1) == respuestasUsuario[pregunta] ? 'radio-button-on-outline' : 'radio-button-off-outline' " slot="start"></ion-icon >
+            {{option}}
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+      <!-- <ion-button expand="block" fill="outline" (click)="next(1)"  shape="round" class="ion-margin">
+        {{respuestas[0]}}
+      </ion-button>
+      <ion-button expand="block" fill="outline" (click)="next(2)" shape="round" class="ion-margin">
+        {{respuestas[1]}}
+      </ion-button>
+      <ion-button expand="block" fill="outline" (click)="next(3)" shape="round" class="ion-margin">
+        {{respuestas[2]}}
+      </ion-button> -->
+     
+   </ion-list> 
+</ion-card-content>
+
+<!-- <ion-item>
+  <ion-button slot="end" (click)="onClick()">
+    <ion-icon slot="icon-only" name="arrow-forward"></ion-icon>
+  </ion-button>
+</ion-item> -->
+
+  
+   </ion-card>
+
+
+

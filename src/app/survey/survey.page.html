@@ -1,0 +1,28 @@
+<ion-header class="ion-padding" color="primary" >
+    <div class="footer-container">
+      <div>
+        <img src="assets/marquesas-logo.png" alt="">
+      </div>
+      <div>
+        <img src="assets/fundacion-cabila-logo.png" alt="">
+      </div>
+      <div>
+        <img src="assets/logo-gobernacion.jpg" alt="">
+      </div>
+    </div>
+    <!-- <p class="titleSurvey ion-no-margin">
+       Encuesta de Violencia de genero en pandemia - Contexto 
+      Informacion principal
+    </p>  -->
+
+</ion-header>
+
+<ion-content color="light" class="ion-padding">
+
+  <div [ngSwitch]="pageToShow">
+    <app-mainform  class="mainMenu" *ngSwitchCase="1"></app-mainform>
+    <app-survey-list *ngSwitchCase="2"></app-survey-list>
+    <app-surveyC  *ngSwitchCase="3"></app-surveyC>
+  </div>
+
+</ion-content>

@@ -5,7 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
-
+import { MainformComponent } from '../components/mainform/mainform.component';
+import { SurveyComponent } from '../components/survey/survey.component';
 
 @NgModule({
   imports: [

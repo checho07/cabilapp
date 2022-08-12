@@ -1,0 +1,117 @@
+<div id="formContainer">  
+<form [formGroup]="_mainData" (ngSubmit)="saveInfo()">
+  <ion-item lines="inset"> 
+    <ion-label>Cedula Marquesa:</ion-label>
+    <ion-input required type="number" formControlName="NumeroIdentificacion"></ion-input>
+  </ion-item>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.NumeroIdentificacion.errors?.required">
+    <ion-icon slot="start" name="alert"></ion-icon> campo requerido
+  </span>
+
+    <ion-item >
+      <ion-label position="floating">Sexo:</ion-label>
+      <ion-select value="" multiple="false" placeholder="Selecciona tu sexo" formControlName="sexo">
+        <ion-select-option *ngFor="let sexo of sexos" [value]="sexo.id">{{sexo.value}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.sexo.errors?.required">
+      <ion-icon slot="start" name="alert"></ion-icon>campo requerido
+    </span>
+      
+    <ion-item>
+      <ion-label position="floating">Edad:</ion-label>
+      <ion-select value="" multiple="false" placeholder="Selecciona edad" formControlName="IntervaloEdad">
+        <ion-select-option *ngFor="let edad of edades" [value]="edad.id">{{edad.value}}</ion-select-option>
+      </ion-select>
+    </ion-item>  
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.IntervaloEdad.errors?.required">
+      <ion-icon slot="start" name="alert"></ion-icon>campo requerido
+    </span>
+    
+    <ion-item >
+      <ion-label position="floating">Género:</ion-label>
+      <ion-select value="" multiple="false" placeholder="Selecciona genero" formControlName="Genero">
+        <ion-select-option *ngFor="let genero of generos" [value]="genero.id">{{genero.value}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.Genero.errors?.required">
+      <ion-icon slot="start" name="alert"></ion-icon>campo requerido
+    </span>
+
+    <ion-item>
+      <ion-label position="floating">Grupo Etnico:</ion-label>
+      <ion-select value="" multiple="false" placeholder="" formControlName="GrupEtnico">
+        <ion-select-option *ngFor="let grupo of grupos_etnicos" [value]="grupo.id">{{grupo.value}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.GrupEtnico.errors?.required">
+      <ion-icon slot="start" name="alert"></ion-icon>campo requerido
+    </span>
+
+    <ion-item>
+      <ion-label position="floating">Municipio:</ion-label>
+      <ion-select multiple="false" placeholder="" formControlName="id_MarquesasApp_Municipio_id">
+        <ion-select-option *ngFor="let municipioI of municipiosList" [value]="municipioI.id" >{{municipioI.name}}</ion-select-option>
+     
+      </ion-select>
+    </ion-item>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.id_MarquesasApp_Municipio_id.errors?.required">
+      <ion-icon slot="start" name="alert"></ion-icon>campo requerido
+    </span>
+
+    <ion-item>
+      <ion-label position="floating">Zona:</ion-label>
+      <ion-select value="" multiple="false" placeholder="" formControlName="Zona">
+        <ion-select-option *ngFor="let zona of zonas" [value]="zona.id">{{zona.value}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.Zona.errors?.required">
+      <ion-icon slot="start" name="alert"></ion-icon>campo requerido
+    </span>
+
+<ion-item>
+      <ion-label  class="ion-text-wrap">Persona en condicion de discapacidad:</ion-label>
+      <ion-select value="" multiple="false" placeholder="" formControlName="condicion_discapacidad">
+        <ion-select-option value=1>Si</ion-select-option>
+        <ion-select-option value=2>No</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.condicion_discapacidad.errors?.required">
+      <ion-icon slot="start" name="alert"></ion-icon>campo requerido
+    </span>
+
+    <ion-item class="ion-text-wrap">
+      <ion-label class="ion-text-wrap">Persona Victima del Conflicto armado:</ion-label>
+      <ion-select value="" multiple="false" placeholder="" formControlName="conflicto_armado">
+        <ion-select-option value=1>Si</ion-select-option>
+        <ion-select-option value=2>No</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.conflicto_armado.errors?.required">
+      <ion-icon slot="start" name="alert"></ion-icon>campo requerido
+    </span> 
+
+    <ion-item>
+      <ion-label>Adjuntar foto</ion-label>
+      <ion-button (click)="takepicture()">
+        <ion-icon slot="icon-only" name="camera"></ion-icon>
+      </ion-button>
+    </ion-item>
+
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.img.errors?.required">
+      <ion-icon slot="start" name="alert"></ion-icon>campo requerido
+    </span>
+    <!-- <ion-item>
+      <input formControlName="img" type="file" id="img" name="img" accept="image/*" >
+    </ion-item> -->
+
+  <!-- <button ion-button type="submit" [disabled]="!mainData.valid">Submit</button> -->
+
+    <ion-button slot="end" expand="full" class="ion-text-center" shape="round"   type="submit" >
+      <ion-icon slot="icon-only" name="arrow-forward"></ion-icon>
+    </ion-button>
+</form>
+
+</div>
+
+
