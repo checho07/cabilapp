@@ -43,15 +43,15 @@ export class SurveyService {
 
 
 
-  async updateSurveysFromDB(){
+  // async updateSurveysFromDB(){
 
-    var surveysFromDb =  this._surveysFromDB;
+  //   var surveysFromDb =  this._surveysFromDB;
 
-    localStorage.setItem('surveysFromDb', JSON.stringify(surveysFromDb)); 
+  //   localStorage.setItem('surveysFromDb', JSON.stringify(surveysFromDb)); 
 
     
-    this.presentToast(`Encuestas cargadas (${surveysFromDb.length}) `)
-  }
+  //   this.presentToast(`Encuestas cargadas (${surveysFromDb.length}) `)
+  // }
 
 
   getSurveysFromDb(){
@@ -59,6 +59,9 @@ export class SurveyService {
     this.httpClient.get('https://cabilapp.herokuapp.com/survey').subscribe(surveys => {
 
       this._surveysFromDB = surveys;
+      localStorage.setItem('surveysFromDb', JSON.stringify(this._surveysFromDB)); 
+
+      this.presentToast(`Encuestas cargadas (${this._surveysFromDB.length}) `)
     })
   
   }

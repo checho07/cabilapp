@@ -108,7 +108,7 @@ export class HomePage   {
 
   updateSurveys(){
 
-    this.surveyService.updateSurveysFromDB();
+    this.surveyService.getSurveysFromDb();
   }
   async presentAlert(text) {
     const alert = await this.alertController.create({
