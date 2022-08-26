@@ -2,7 +2,7 @@
 <form [formGroup]="_mainData" (ngSubmit)="saveInfo()">
   <ion-item lines="inset"> 
     <ion-label>Cedula Marquesa:</ion-label>
-    <ion-input required type="number" formControlName="NumeroIdentificacion"></ion-input>
+    <ion-input required type="number" formControlName="NumeroIdentificacion" appOnlynumbers></ion-input>
   </ion-item>
   <span class="error ion-padding" *ngIf="isSubmitted && errorControl.NumeroIdentificacion.errors?.required">
     <ion-icon slot="start" name="alert"></ion-icon> campo requerido

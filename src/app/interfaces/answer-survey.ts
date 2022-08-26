@@ -22,5 +22,6 @@ export interface AnswerSurvey {
             id_MarquesasApp_Municipio_id: Number,
             id_WebTablasBasicasApp_encuesta_id :Number,
             surveyName: String;
+            idRespuesta: String
 
 }

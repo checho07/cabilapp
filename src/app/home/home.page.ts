@@ -39,7 +39,6 @@ export class HomePage   {
 
     this.subjectService.getSubject('homeSurveysCount').subscribe((res) => {   
 
-      debugger
       this.surveysTotal = localStorage.getItem('surveysTotal') == 'null' ? 0 :  localStorage.getItem('surveysTotal') ;   
     })
 
@@ -51,7 +50,6 @@ export class HomePage   {
 
   openModal(isOpen: boolean){
 
-    debugger
     this.isModalOpen = isOpen;
 
     if(isOpen){
@@ -130,7 +128,6 @@ export class HomePage   {
     }
 
   }
-
 
 
   

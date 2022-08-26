@@ -11,6 +11,7 @@ import { MainformComponent } from '../components/mainform/mainform.component';
 import { SurveyComponent } from '../components/survey/survey.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { SurveyListComponent } from '../components/survey-list/survey-list.component';
+import { OnlynumbersDirective } from '../directives/onlynumbers.directive';
 
 @NgModule({
   imports: [
@@ -20,6 +21,6 @@ import { SurveyListComponent } from '../components/survey-list/survey-list.compo
     IonicModule,
     SurveyPageRoutingModule, 
   ],
-  declarations: [SurveyPage,MainformComponent, SurveyComponent, SurveyListComponent]
+  declarations: [SurveyPage,MainformComponent, SurveyComponent, SurveyListComponent,OnlynumbersDirective]
 })
 export class SurveyPageModule {}

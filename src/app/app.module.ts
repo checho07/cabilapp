@@ -13,6 +13,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {Drivers} from '@ionic/storage';
 import { Camera } from '@awesome-cordova-plugins/camera/ngx';
 import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
+import { OnlynumbersDirective } from './directives/onlynumbers.directive';
 
 @NgModule({
   declarations: [AppComponent],

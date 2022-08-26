@@ -32,7 +32,7 @@ export class DbService {
       this.presentLoading();
 
       // https://cabilapp.herokuapp.com
-      debugger
+
       this.httpClient.post<any>('https://cabilapp.herokuapp.com/sync',surveys).subscribe(data => {
         this.cleanLocalDb();
 
@@ -87,7 +87,6 @@ export class DbService {
     })
       .then((db: SQLiteObject) => {
 
-        debugger
         console.log('sqlite Instance:', db );
         
         this.sqlInstance = db;
@@ -138,7 +137,8 @@ export class DbService {
               condicion_discapacidad TEXT,
               conflicto_armado TEXT,
               surveyName TEXT,
-              img TEXT
+              img TEXT,
+              idRespuesta TEXT
               )`, [])
             .then(() => {console.log('Executed SURVEY SQL'); })
             .catch(e => console.log('Error', e));
@@ -160,10 +160,10 @@ export class DbService {
       var testsql :SQLiteObject = this.sqlInstance;
       testsql.executeSql('DELETE FROM mainForm ',[])
       .then(res => {
-        debugger
+
         console.log('Table deleted')
       }).catch(err => {
-        debugger
+
         console.error(err)
       })
     }
@@ -172,21 +172,28 @@ export class DbService {
       var testsql :SQLiteObject = this.sqlInstance;
       testsql.executeSql('DELETE FROM surveys ',[])
       .then(res => {
-        debugger
+
         console.log('Table surveys deleted')
       }).catch(err => {
-        debugger
+
         console.error(err)
       })
     }
 
     saveSurveyToSql(surveyAnswered: any){
 
+
+      var subS = (surveyAnswered.NumeroIdentificacion + " ").substring(0,3)
+
+      var idRespuesta = `${subS}${surveyAnswered.id_MarquesasApp_Municipio_id}${surveyAnswered.img.substring(2500,2503)}`
+
       var sql: SQLiteObject = this.sqlInstance;
+
+ 
 
       return sql.executeSql(`
       INSERT INTO surveys 
-      VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+      VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
       [
         surveyAnswered.NumeroIdentificacion, 
         surveyAnswered.IntervaloEdad,
@@ -213,7 +220,8 @@ export class DbService {
         surveyAnswered.condicion_discapacidad,
         surveyAnswered.conflicto_armado,
         surveyAnswered.surveyName,
-        surveyAnswered.img
+        surveyAnswered.img,
+        idRespuesta
       ]); 
 
     }
@@ -230,7 +238,7 @@ export class DbService {
      
   
        let mainForm = await this.selectSql('mainForm');
-      debugger
+
   
       this.answeredSurvey = {
         ...mainForm.rows.item(0),

@@ -53,7 +53,8 @@
                 </ion-list-header>
                   <ion-card *ngFor="let answer of surveysAnsweredObj.items" color="light" >
                     <ion-card-header>
-                      <ion-card-title> ID: {{answer.id_WebTablasBasicasApp_encuesta_id }}</ion-card-title>
+                      <ion-card-title> ID encuesta: {{answer.id_WebTablasBasicasApp_encuesta_id }}</ion-card-title>
+                      <ion-card-title> ID Respuesta: {{answer.idRespuesta}}</ion-card-title>
                     </ion-card-header>
                     <ion-card-content>
                       <span><strong>Nombre: </strong> {{answer.surveyName}}</span>
@@ -72,7 +73,8 @@
             Sincronizar encuestas
           </ion-button>
         </p>
-     
+
+
       </div>
 
       <div class="footer-container">

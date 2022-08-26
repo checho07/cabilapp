@@ -7,6 +7,7 @@ import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
 import { MainformComponent } from '../components/mainform/mainform.component';
 import { SurveyComponent } from '../components/survey/survey.component';
+import { OnlynumbersDirective } from '../directives/onlynumbers.directive';
 
 @NgModule({
   imports: [
