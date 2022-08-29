@@ -61,7 +61,7 @@ export class MainformComponent implements OnInit {
 
 
     this.mainData = this.formBuilder.group({
-      NumeroIdentificacion: ["",Validators.required],
+      NumeroIdentificacion: ["",[Validators.required, Validators.pattern('[0-9]*$')]],
       sexo:["", Validators.required],
       IntervaloEdad:["", Validators.required],
       Genero:["",Validators.required],
@@ -88,6 +88,9 @@ export class MainformComponent implements OnInit {
 
     this.isSubmitted = true;
     var data:mainForm = this.mainData.value; 
+
+     data.NumeroIdentificacion = this.convertFloatToInt(data.NumeroIdentificacion);
+     debugger
 
     if (!this.mainData.valid) {
       
@@ -131,6 +134,13 @@ export class MainformComponent implements OnInit {
 
   
   
+
+  }
+
+  convertFloatToInt(floatnumber){
+    var floatToString = floatnumber.toString();
+    var withoutPoint = floatToString.replace(/\./g,'');
+    return parseInt(withoutPoint);
 
   }
 

@@ -7,6 +7,9 @@
   <span class="error ion-padding" *ngIf="isSubmitted && errorControl.NumeroIdentificacion.errors?.required">
     <ion-icon slot="start" name="alert"></ion-icon> campo requerido
   </span>
+  <span class="error ion-padding" *ngIf="_mainData.get('NumeroIdentificacion').hasError('pattern') && _mainData.get('NumeroIdentificacion').dirty">
+    <ion-icon slot="start" name="alert"></ion-icon> Ingresa solo numeros
+  </span>
 
     <ion-item >
       <ion-label position="floating">Sexo:</ion-label>
