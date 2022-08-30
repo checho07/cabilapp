@@ -5,6 +5,9 @@ import { DbService } from './services/db.service';
 
 
 
+/**
+ * @ignore
+ */
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',

@@ -8,6 +8,12 @@ import { SubjectsService } from '../services/subjects.service';
 import { SurveyService } from '../services/survey.service';
 
 import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
+
+
+/**
+ * Pagina principal que muesta los botones de acccion y la modal de respuestas guardadas localmente
+ */
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -17,8 +23,17 @@ export class HomePage   {
 
   @ViewChild(IonModal) modal: IonModal;
 
+  /**
+   * Listado de encuestas resueltas obtenidas de SQLite
+   */
   surveysAnswered:any = [];
+
+  /**
+   * Validacion para mostrar el botono sincornizar solamente si hay respuestas
+   */
   showSync:boolean = true;
+
+
 
   surveysAnsweredObj = {
     length : 0,
@@ -26,9 +41,19 @@ export class HomePage   {
     showSync: false
   };
 
+  /**
+   * Variable de control para abrir o cerrar ventana modal
+   */
   isModalOpen = false;
+
+  /**
+   * Varaibel contadora de encuestas
+   */
   surveysTotal:any = 0;
 
+  /**
+   * @ignore
+   */
   constructor(
     private surveyService: SurveyService, 
     private subjectService: SubjectsService,
@@ -44,10 +69,11 @@ export class HomePage   {
 
   }
 
-  ngOnInit() {    
  
-  }
-
+  /**
+   * Funcion para abrir modal de respuestas de encuestas
+   * @param {boolean} isOpen variable para determinar si se abre o se cierra la modal
+   */
   openModal(isOpen: boolean){
 
     this.isModalOpen = isOpen;
@@ -57,6 +83,9 @@ export class HomePage   {
     }
   }
 
+  /**
+   * Funcion que hace una llamada a SQLite para obtener las respuestas guardadas localmente
+   */
   async getAllSurveys(){
 
     this.surveysTotal = localStorage.getItem('surveysTotal') == 'null' ? 0 :  localStorage.getItem('surveysTotal') ;  
@@ -76,6 +105,9 @@ export class HomePage   {
     }
   }
 
+  /**
+   * Funcion que valida si se han cargado encuestas desde la nube para poder iniciar una encuesta
+   */
   checkStartSurvey(){
     var surveysloaded = localStorage.getItem('surveysFromDb');
 
@@ -87,11 +119,17 @@ export class HomePage   {
 
   }
 
+  /**
+   * Funcion para cerrar ventana modal de respuestas
+   */
   cancel() {
     this.modal.dismiss(null, 'cancel');
     this.openModal(false)
   }
 
+  /**
+   * Metodo que ejecuta una funcion para sincronizar las respuestas previamente cargadas a la nube
+   */
   confirm() {
     this.syncAllAnsweredSurveys();
     this.openModal(false)
@@ -99,17 +137,27 @@ export class HomePage   {
   }
 
  
+  // /**
+  //  * 
+  //  */
+  // showInfoSaved(){
+  //   var data = localStorage.getItem('mainForm');
+  //   console.log(JSON.parse(data))
+  //   alert(data);
+  // }
 
-  showInfoSaved(){
-    var data = localStorage.getItem('mainForm');
-    console.log(JSON.parse(data))
-    alert(data);
-  }
-
+  /**
+   * Funcion para hacer una llamada a API y obtener las ultimas encuestas
+   */
   updateSurveys(){
 
     this.surveyService.getSurveysFromDb();
   }
+
+  /**
+   * Funcion para presentar un aalerta con texto determinado
+   * @param {string} text texto para mostrar en la alerta
+   */
   async presentAlert(text) {
     const alert = await this.alertController.create({
       subHeader:'No tienes encuestas sincronizadas.',
@@ -121,6 +169,8 @@ export class HomePage   {
     await alert.present();
   }
 
+
+  /**Funcion que sincroniza todas las respuestas guardadas localmente a la nube */
   syncAllAnsweredSurveys(){
     if(this.showSync){
       this.surveysAnsweredObj.items[0].date_created = new Date(this.surveysAnsweredObj.items[0].date_created);

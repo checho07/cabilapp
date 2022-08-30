@@ -9,14 +9,28 @@ import { LoadingController } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
 import { mainForm } from '../interfaces/mainForm';
 
+/**
+ * Servicio que manipula SQLite y hace llamados a la API
+ */
+
 @Injectable({
   providedIn: 'root'
 })
 export class DbService {
 
+  /**
+   * Objeto de instancia para SQLite
+   */
   private _sqlInstance: SQLiteObject;
+
+  /**
+   * Objeto para guardar temporalmente las respuestas de las encuestas
+   */
   private answeredSurvey = {} as AnswerSurvey;
 
+    /**
+     * @ignore
+     */
     constructor(
       private httpClient: HttpClient, 
       private router: Router,
@@ -28,6 +42,11 @@ export class DbService {
     
   
 
+    /**
+     * Funcion que hace llamada a la API para guardar las 
+     * respuestas en la nube, luego limpia la BD SQLlite
+     * @param {Array<AnswerSurvey>} surveys Lista de respuestas de encuesta
+     */   
     syncSurvey(surveys: AnswerSurvey[]){
       this.presentLoading();
 
@@ -44,6 +63,9 @@ export class DbService {
     }
 
 
+    /**
+     * Funcion para limpiar base de datos SQLlite, luego redirecciona al HOME
+     */
     cleanLocalDb(){
      
       localStorage.clear();
@@ -57,6 +79,9 @@ export class DbService {
 
     }
 
+   /**
+ * Funcion que presenta una anuimacion de cargando durante 1 segundo
+  */
     async presentLoading() {
       const loading = await this.loadingController.create({
         message: 'Sincronizando',
@@ -66,19 +91,32 @@ export class DbService {
     }
 
 
+    /**
+     * Funcion para cerrar animacion de cargando
+     */
     dismissLoading(){
       this.loadingController.dismiss();
     }
 
+    /**
+     * Funcion SETTER para asignar instancia de SQLlite
+     */
     public set sqlInstance(v : SQLiteObject) {
       this._sqlInstance = v;
     }
   
     
+    /**
+     * Funcion GETTER obtener instancia de SQLite
+     */
     public get sqlInstance() : SQLiteObject {
       return this._sqlInstance
     }
 
+
+    /**
+     * Funcion que crea las tablas de SQLite localmente: mainForm y surveys
+     */
     initSql(){     
 
     this.sqlite.create({
@@ -148,14 +186,24 @@ export class DbService {
       .catch(e => console.log(e));
     }
 
-    async selectSql(table):Promise<any>{
+    /**
+     * Funcion para realizar sentencia SELECT en SQLite de una tabla
+     * @param {string} table  Nombre de la tabla a seleccionar
+     * @returns retorna la respuesta de la sentencia SQL
+     */
+    async selectSql(table: string):Promise<any>{
 
       var testsql :SQLiteObject = this.sqlInstance;
      return  testsql.executeSql(`SELECT * FROM ${table} `,[])
      
     }
 
-    deleteSql(table?){
+
+    /**
+     * Funcion para realizar sentencia DELETE en SQLite de una tabla
+     *@param {string} table  Nombre de la tabla a seleccionar
+     */
+    deleteSql(table?:string){
 
       var testsql :SQLiteObject = this.sqlInstance;
       testsql.executeSql('DELETE FROM mainForm ',[])
@@ -168,6 +216,10 @@ export class DbService {
       })
     }
 
+      /**
+     * Funcion para realizar sentencia DELETE en SQLite de una tabla
+     *@param {string} table  Nombre de la tabla a seleccionar
+     */
     deleteSurveysSql(){
       var testsql :SQLiteObject = this.sqlInstance;
       testsql.executeSql('DELETE FROM surveys ',[])
@@ -180,6 +232,12 @@ export class DbService {
       })
     }
 
+    /**
+     * Funcion que toma las respuestas de una encuesta, agruega un campo unica para cada respuesta
+     * luego se ejecuta una sentencia SQL INSERT, para guardar la respuesta de forma local en SQLite
+     * @param surveyAnswered Objecto con la encuesta respondida y tipada para guardar
+     * @returns retorna respuesta de Sentencia SQL
+     */
     saveSurveyToSql(surveyAnswered: any){
 
 
@@ -227,6 +285,10 @@ export class DbService {
     }
 
 
+    /**
+     * Funcion que hace llamado a una seentencia SQL para obtener todas las encuestas respondidas
+     * @returns retorna lista de encuestas respondidas
+     */
    async getAllAnsweredSurveys(){
 
     let surveys = await this.selectSql('surveys');   
@@ -234,6 +296,14 @@ export class DbService {
       return  surveys.rows;
     };
 
+    /**
+     * Funcion para mapear y posteriormente guardar una encuesta en SQLite, que se respondio previamente.
+     * @param surveyAnswered 
+     * @param {string} _surveyName 
+     * @param {any} _surveyId 
+     * @param {Date} _date 
+     * @returns 
+     */
    async saveSurveyToLocalDB(surveyAnswered , _surveyName, _surveyId, _date){     
      
   

@@ -5,11 +5,20 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
 })
 export class OnlynumbersDirective {
 
+  /**
+   * Expresion regular para hacer match solo con digitos 
+   */
   private regex: RegExp = new RegExp(/^[+]?\d+([.]\d+)?$/g);
-  // Allow key codes for special events. Reflect :
-  // Backspace, tab, end, home
+
+  /**
+   * Lista de teclas permitidas 
+   */
   private specialKeys: Array<string> = [ 'Backspace', 'End', 'Home' ];
 
+  /**
+   * 
+   * @ignore
+   */
   constructor(private el: ElementRef) { }
 
   @HostListener('keydown', [ '$event' ])

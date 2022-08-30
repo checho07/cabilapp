@@ -1,13 +1,19 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
+/**
+ * Servicio para manejar estados y mostrar las respectivas pantallas
+ */
+
 @Injectable({
   providedIn: 'root'
 })
 export class SubjectsService {
 
 
-
+  /**
+   * Variable para observar el estado de pantalla
+   */
   mainPath = 1;
 
   objSurvey = {};

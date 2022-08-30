@@ -14,6 +14,13 @@ import { DbService } from 'src/app/services/db.service';
 import { SurveyService } from 'src/app/services/survey.service';
 
 
+/**
+ * 
+ * @description 
+ * Este componente muestra el formulario principal para presentar encuesta.
+ */
+
+
 @Component({
   selector: 'app-mainform',
   templateUrl: './mainform.component.html',
@@ -21,29 +28,63 @@ import { SurveyService } from 'src/app/services/survey.service';
 })
 export class MainformComponent implements OnInit {
 
-  
+  /**
+   * Grupo de Formulario que contiene los controladores del formulario
+   *
+   */
   private mainData: FormGroup;
 
   
+  /**
+   * Metodo de acceso GETTER para obtener los datos del Formulario 
+   * @returns Retorna el formulario mainData
+   */
   public get _mainData() : FormGroup {
     return this.mainData
   }
 
-
-  
-
+ /**
+  * Propiedad para identificar si se ha enviado el forulario
+  * @type {Boolean}
+  */
   isSubmitted:boolean;
 
 
+  /**
+   * Lista de municipios en formato [{id, name}] 
+   * 
+   */
   municipiosList = MUNICIPIOS;
+
+  /**
+   *  Listo de sexo en formato [{id, value}]
+   */
   sexos = SEXO;
+
+  /**
+   * Lista de generos en formato [{id, value}]
+   */
   generos = GENERO;
+
+  /**
+   * Lista de edades en formato [{id, value}]
+   */
   edades = EDAD;
+
+  /**
+   * Lista de grupos etnicos en formato [{id, value}]
+   */
   grupos_etnicos = GRUPO_ETNICO;
+
+  /**
+   * Lista de Zonas en formato {id. value}
+   */
   zonas = ZONA;
 
 
-  
+  /**
+   * @ignore
+   */
   constructor(
      private sqlite: SQLite,
      private camera: Camera,  
@@ -77,13 +118,22 @@ export class MainformComponent implements OnInit {
 
    }
 
-  ngOnInit() {
+  /**
+   * Funcion inicializadora del componente
+   * Ejecuta una funcion para ordenar la lista de municipios.
+   */
+   ngOnInit() {
 
     this.municipiosList.sort((a,b) => a.name.localeCompare(b.name));
 
 
   }
 
+
+/**
+ *  Funcion que guarda la informacion del formulario principal en SQLite de forma local
+ * 
+ */
   saveInfo(){
 
     this.isSubmitted = true;
@@ -137,18 +187,35 @@ export class MainformComponent implements OnInit {
 
   }
 
-  convertFloatToInt(floatnumber){
+
+/**
+ * Funcion que permite eliminar puntos o comas del campo numero de identificacion
+ * @param {Number} floatnumber Numero con punto o coma
+ * @returns Retorna un numero entero sin puntos ni comas
+ * @example convertFloatToInt(123.456)
+ */
+  convertFloatToInt(floatnumber: number):Number{
     var floatToString = floatnumber.toString();
     var withoutPoint = floatToString.replace(/\./g,'');
     return parseInt(withoutPoint);
 
   }
 
+  /**
+   * Funcion GETTER para obtener los errores de validacion de formulario
+   * @returns Retorna el listado de errores de validacion
+   */
   get errorControl() {
     return this.mainData.controls;
   }
 
-async presentAlert(text) {
+
+/**
+ * Funcion que presenta una Alerta con un texto especifico
+ * @param {string} text texto a mostrar en la alerta
+ * @example presentAlert(texto de prueba)
+ */  
+async presentAlert(text: string) {
   const alert = await this.alertController.create({
     header: 'Error ',
     message: text,
@@ -158,8 +225,16 @@ async presentAlert(text) {
   await alert.present();
 }
 
+
+
+/**
+ * Funcion que abre la camara y toma una foto y la guarda en formato base64
+ */
 takepicture(){
 
+  /**
+   * Objecto de configuracion para abrir la camara
+   */
   const options: CameraOptions = {
     quality: 40,
     destinationType: this.camera.DestinationType.DATA_URL,
@@ -177,7 +252,9 @@ takepicture(){
    });
 }
 
-
+/**
+ * Funcion que presenta una anuimacion de cargando durante 1 segundo
+ */
 async presentLoading() {
   const loading = await this.loadingController.create({
     message: 'Cargando...',
