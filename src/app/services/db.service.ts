@@ -243,7 +243,11 @@ export class DbService {
 
       var subS = (surveyAnswered.NumeroIdentificacion + " ").substring(0,3)
 
-      var idRespuesta = `${subS}${surveyAnswered.id_MarquesasApp_Municipio_id}${surveyAnswered.img.substring(2500,2503)}`
+      // var idRespuesta = `${subS}${surveyAnswered.id_MarquesasApp_Municipio_id}${surveyAnswered.img.substring(2500,2503)}`
+
+      var timeString  = String(Math.floor(new Date().getTime()/1000.0)).slice(-4);
+
+      var idRespuesta = `${subS}${surveyAnswered.id_MarquesasApp_Municipio_id}${Number(timeString)}`
 
       var sql: SQLiteObject = this.sqlInstance;
 

@@ -32,8 +32,8 @@
     </span>
     
     <ion-item >
-      <ion-label position="floating">Género:</ion-label>
-      <ion-select value="" multiple="false" placeholder="Selecciona genero" formControlName="Genero">
+      <ion-label position="floating">Orientación sexual:</ion-label>
+      <ion-select value="" multiple="false" placeholder="Selecciona" formControlName="Genero">
         <ion-select-option *ngFor="let genero of generos" [value]="genero.id">{{genero.value}}</ion-select-option>
       </ion-select>
     </ion-item>

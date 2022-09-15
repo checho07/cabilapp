@@ -11,7 +11,7 @@ import { SurveyService } from 'src/app/services/survey.service';
   templateUrl: './survey-list.component.html',
   styleUrls: ['./survey-list.component.scss'],
 })
-export class SurveyListComponent implements OnInit {
+export class SurveyListComponent  {
 
   /**
    * Listado de encuestas que se toma de base de datos previamente cargada

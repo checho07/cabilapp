@@ -1,13 +1,13 @@
 export interface mainForm {
 
-    NumeroIdentificacion: Number,
-    sexo: Number,
-    IntervaloEdad: Number,
-    Genero: Number,
-    GrupEtnico: Number,
-    id_MarquesasApp_Municipio_id: Number,
-    Zona :Number,
-    condicion_discapacidad: Boolean,
-    conflicto_armado: Boolean,
-    img: String
+    NumeroIdentificacion: number,
+    sexo: number,
+    IntervaloEdad: number,
+    Genero: number,
+    GrupEtnico: number,
+    id_MarquesasApp_Municipio_id: number,
+    Zona :number,
+    condicion_discapacidad: boolean,
+    conflicto_armado: boolean,
+    img: string
 }

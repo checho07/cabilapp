@@ -194,7 +194,7 @@ export class MainformComponent implements OnInit {
  * @returns Retorna un numero entero sin puntos ni comas
  * @example convertFloatToInt(123.456)
  */
-  convertFloatToInt(floatnumber: number):Number{
+  convertFloatToInt(floatnumber: number):number{
     var floatToString = floatnumber.toString();
     var withoutPoint = floatToString.replace(/\./g,'');
     return parseInt(withoutPoint);

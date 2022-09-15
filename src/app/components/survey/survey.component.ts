@@ -15,7 +15,7 @@ import { SurveyService } from 'src/app/services/survey.service';
   templateUrl: './survey.component.html',
   styleUrls: ['./survey.component.scss'],
 })
-export class SurveyComponent implements OnInit {
+export class SurveyComponent {
 
 /**
  * Variable temporal para determinar en pregunta actual se encuentra
