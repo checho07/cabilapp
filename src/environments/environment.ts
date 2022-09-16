@@ -6,6 +6,16 @@ export const environment = {
   production: false
 };
 
+export const firebaseConfig = {
+  apiKey: "AIzaSyDXg581e2BBcdJtQ5c-4T6X0Wvblku2Lgs",
+  authDomain: "cabilapp.firebaseapp.com",
+  projectId: "cabilapp",
+  storageBucket: "cabilapp.appspot.com",
+  messagingSenderId: "331665055138",
+  appId: "1:331665055138:web:e14e281264811190b026fb",
+  measurementId: "G-QQLZK7W5P4"
+};
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

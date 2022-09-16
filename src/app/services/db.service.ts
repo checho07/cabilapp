@@ -8,6 +8,7 @@ import { SubjectsService } from './subjects.service';
 import { LoadingController } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
 import { mainForm } from '../interfaces/mainForm';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 /**
  * Servicio que manipula SQLite y hace llamados a la API
@@ -28,6 +29,9 @@ export class DbService {
    */
   private answeredSurvey = {} as AnswerSurvey;
 
+
+  private url: string;
+
     /**
      * @ignore
      */
@@ -37,8 +41,13 @@ export class DbService {
       private subjectService: SubjectsService,
       private loadingController: LoadingController,
       private sqlite: SQLite,
-      private surveyservice: SurveyService
-       ) { }
+      private surveyservice: SurveyService,
+      private fb: AngularFirestore
+       ) {
+
+        this.url = localStorage.getItem('url');
+
+        }
     
   
 
@@ -52,7 +61,15 @@ export class DbService {
 
       // https://cabilapp.herokuapp.com
 
-      this.httpClient.post<any>('https://cabilapp.herokuapp.com/sync',surveys).subscribe(data => {
+      if(this.url == null ){
+        this.fb.collection('config').doc('0').valueChanges().subscribe((res:any) => {
+  
+          localStorage.setItem('url',res.url);
+          this.url = res.url
+        })
+      }
+
+      this.httpClient.post<any>(`${this.url}sync`,surveys).subscribe(data => {
         this.cleanLocalDb();
 
       }, err => {

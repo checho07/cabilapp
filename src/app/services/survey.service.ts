@@ -4,6 +4,7 @@ import { AnswerSurvey } from '../interfaces/answer-survey';
 import { mainForm } from '../interfaces/mainForm';
 import { DbService } from './db.service';
 import { HttpClient } from '@angular/common/http';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class SurveyService {
 
   _surveysFromDB;
 
+  private url: string;
 
   // _surveysFromDB = [
   //   {
@@ -35,9 +37,12 @@ export class SurveyService {
     
   //  ]
 
-  constructor( private toastController: ToastController, private httpClient: HttpClient) {
+  constructor( private toastController: ToastController, private httpClient: HttpClient, private fb: AngularFirestore) {
+
+    this.url = localStorage.getItem('url');
 
       this.getSurveysFromDb();
+
 
    }
 
@@ -56,7 +61,15 @@ export class SurveyService {
 
   getSurveysFromDb(){
 
-    this.httpClient.get('https://cabilapp.herokuapp.com/survey').subscribe(surveys => {
+    if(this.url == null ){
+      this.fb.collection('config').doc('0').valueChanges().subscribe((res:any) => {
+
+        localStorage.setItem('url',res.url);
+        this.url = res.url
+      })
+    }
+
+    this.httpClient.get(`${this.url}survey`).subscribe(surveys => {
 
       this._surveysFromDB = surveys;
       localStorage.setItem('surveysFromDb', JSON.stringify(this._surveysFromDB)); 

@@ -1,6 +1,6 @@
 {
   "name": "cabilapp",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Sergio Velandia",
   "scripts": {
     "ng": "ng",
@@ -15,6 +15,7 @@
   "dependencies": {
     "@angular/common": "^14.0.0",
     "@angular/core": "^14.0.6",
+    "@angular/fire": "^7.4.1",
     "@angular/forms": "^14.0.0",
     "@angular/platform-browser": "^14.0.0",
     "@angular/platform-browser-dynamic": "^14.0.0",
@@ -35,6 +36,7 @@
     "cordova-plugin-camera": "^6.0.0",
     "cordova-plugin-screen-orientation": "^3.0.2",
     "cordova-sqlite-storage": "^6.0.0",
+    "firebase": "^9.10.0",
     "localforage-cordovasqlitedriver": "^1.8.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",

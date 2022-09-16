@@ -14,6 +14,9 @@ import {Drivers} from '@ionic/storage';
 import { Camera } from '@awesome-cordova-plugins/camera/ngx';
 import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
 import { OnlynumbersDirective } from './directives/onlynumbers.directive';
+import { AngularFireModule } from '@angular/fire/compat';
+import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
+import { firebaseConfig } from 'src/environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,6 +25,8 @@ import { OnlynumbersDirective } from './directives/onlynumbers.directive';
     IonicModule.forRoot(), 
     AppRoutingModule,
     HttpClientModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },ScreenOrientation, Camera, SQLite],
   bootstrap: [AppComponent],

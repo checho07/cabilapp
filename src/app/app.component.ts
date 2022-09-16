@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/ngx';
 import { Platform } from '@ionic/angular';
 import { DbService } from './services/db.service';
@@ -20,8 +21,14 @@ export class AppComponent {
   constructor(
     private screenOrientation: ScreenOrientation, 
     private dbService: DbService,
+    private fb : AngularFirestore,
     private platform: Platform ) {
 
+    
+      this.fb.collection('config').doc('0').valueChanges().subscribe((res:any) => {
+
+        localStorage.setItem('url',res.url);
+      })
     
 
     this.platform.ready().then(res => {
