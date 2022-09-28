@@ -111,7 +111,7 @@ export class MainformComponent implements OnInit {
       Zona:["", Validators.required],
       condicion_discapacidad:["", Validators.required],
       conflicto_armado:["", Validators.required],
-      img:["",]
+      img:["",Validators.required]
     })
 
   

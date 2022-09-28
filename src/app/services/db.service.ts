@@ -263,8 +263,9 @@ export class DbService {
       // var idRespuesta = `${subS}${surveyAnswered.id_MarquesasApp_Municipio_id}${surveyAnswered.img.substring(2500,2503)}`
 
       var timeString  = String(Math.floor(new Date().getTime()/1000.0)).slice(-4);
+      var randomString = Math.random().toString(36)
 
-      var idRespuesta = `${subS}${surveyAnswered.id_MarquesasApp_Municipio_id}${Number(timeString)}`
+      var idRespuesta = `${subS}${randomString.substring(2,6)}${Number(timeString)}`
 
       var sql: SQLiteObject = this.sqlInstance;
 
